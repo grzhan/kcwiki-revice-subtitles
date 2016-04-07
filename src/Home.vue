@@ -34,6 +34,7 @@ module.exports =
   data: ->
     verson: '20160406'
     title: '舰娘语音校对表'
+    shipList: []
 </script>
 
 <style>

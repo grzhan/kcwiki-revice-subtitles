@@ -45,6 +45,8 @@ module.exports =
       console.error err
   data: ->
     result: {}
+    names: []
+    voices: []
 </script>
 
 <style>
