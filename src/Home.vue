@@ -1,0 +1,46 @@
+<template>
+  <div id="home" class="ui column centered stackable grid">
+    <div class="column ui segment">
+      <div class="ui inverted dimmer">
+        <div class="ui text loader">正在获取数据，请稍候...</div>
+      </div>
+      <h1 class="ui centered dividing header">
+        kcwiki舰娘语音校对表
+        <div class="sub header">
+            ver.{{verson}} by grzhan
+        </div>
+      </h1>
+      <div class="ui fluid input">
+        <input type="text" v-model="name" placeholder="输入要找的舰娘名（仅支持日文）">
+      </div>
+      <div class="ui stackable grid" id="container">
+      <div class="three wide column" v-for="ship in shipList | filterBy name in 'shipName'"><a v-link="'List/'+ship.shipId" class="ui tag teal label">{{ship.shipId}}.{{ ship.shipName }}</a></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="coffee">
+module.exports =
+  ready: ->
+    dimmer = document.querySelector('.ui.dimmer')
+    dimmer.className += ' active'
+    this.$http.get('/data/ship_names.json').then (response) ->
+      this.$set('shipList', response.data)
+      dimmer.className = dimmer.className.replace('active', '')
+    , (err) ->
+      dimmer.className = dimmer.className.replace('active', '')
+      console.error err
+  data: ->
+    verson: '20160406'
+    title: '舰娘语音校对表'
+</script>
+
+<style>
+#home {
+  padding: 5% 15%;
+}
+#home #container {
+  padding: 20px;
+}
+</style>
