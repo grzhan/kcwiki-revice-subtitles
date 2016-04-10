@@ -11,10 +11,10 @@
         </div>
       </h1>
       <div class="ui fluid input">
-        <input type="text" v-model="name" placeholder="输入要找的舰娘名（仅支持日文）">
+        <input type="text" v-model="query" placeholder="输入要找的舰娘名（仅支持日文）或ID">
       </div>
       <div class="ui stackable grid" id="container">
-      <div class="three wide column" v-for="ship in shipList | filterBy name in 'shipName'"><a v-link="'List/'+ship.shipId" class="ui tag teal label">{{ship.shipId}}.{{ ship.shipName }}</a></div>
+      <div class="three wide column" v-for="ship in shipList | filterBy query"><a v-link="'List/'+ship.shipId" class="ui tag teal label">{{ship.shipId}}.{{ ship.shipName }}</a></div>
       </div>
     </div>
   </div>
@@ -32,7 +32,7 @@ module.exports =
       dimmer.className = dimmer.className.replace('active', '')
       console.error err
   data: ->
-    verson: '20160406'
+    verson: '20160410'
     title: '舰娘语音校对表'
     shipList: []
 </script>

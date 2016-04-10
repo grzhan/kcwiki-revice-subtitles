@@ -7,17 +7,18 @@
       <h1 class="ui centered dividing header">
         {{result.shipName}} - 语音校对表
         <div class="sub header">
-          Ship ID：{{ $route.params.id }}
+          Ship ID：{{ $route.params.id }} (<a v-link="'/Home'">返回首页</a>)
         </div>
       </h1>
       <div class="ui grid" id="container">
         <table class="ui celled table">
-          <thead> <tr> <th class="one wide">序号</th> <th class="two wide">场景</th><th>语音</th> <th>日文</th> <th>中文</th> </tr> </thead> 
+          <thead> <tr> <th class="one wide">序号</th> <th class="two wide">场景</th><th>语音</th> <th>下载</th> <th>日文</th> <th>中文</th></tr> </thead> 
           <tbody>
             <tr v-for="v in voices">
               <td>{{v}}</td>
               <td>{{names[v]}}</td>
               <td><ship-audio :url="result.url[v]" :vid="v"></ship-audio></td>
+              <td><a href="{{result.url[v]}}" download="{{v}}.mp3"><i class="download icon"></i></a></td>
               <td>{{result.jp[v]}}</td>
               <td>{{result.zh[v]}}</td>
             </tr>
@@ -52,5 +53,9 @@ module.exports =
 <style>
 #list {
   padding: 5% 5% 5%;
+}
+
+.table a {
+  color: #000;
 }
 </style>
