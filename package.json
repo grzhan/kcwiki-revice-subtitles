@@ -9,6 +9,7 @@
     "build": "cross-env NODE_ENV=production browserify src/main.js | uglifyjs -c warnings=false -m > dist/build.js"
   },
   "dependencies": {
+    "md5": "^2.1.0",
     "vue": "^1.0.0"
   },
   "devDependencies": {
