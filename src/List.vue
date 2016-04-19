@@ -7,14 +7,18 @@
       <h1 class="ui centered dividing header">
         {{result.shipName}} - 语音校对表
         <div class="sub header">
-          Ship ID：{{ $route.params.id }} (<a v-link="'/Home'">返回首页</a>)
+          Ship ID：{{ $route.params.id }} <a class="ui blue label" v-link="'/Home'">返回首页</a> 
+          <a v-on:click="toggle" class="ui grey label" v-if="result.same">
+            <span v-if="sameState">隐藏</span>
+            <span v-else>显示</span>相同语音
+          </a>
         </div>
       </h1>
       <div class="ui grid" id="container">
         <table class="ui celled table">
           <thead> <tr> <th class="one wide">序号</th> <th class="two wide">场景</th><th>语音</th> <th>下载</th> <th>日文</th> <th>中文</th></tr> </thead> 
           <tbody>
-            <tr v-for="v in voices">
+            <tr v-for="v in voices" v-if="sameState || result.same && !result.same[v]">
               <td>{{v}}</td>
               <td>{{names[v]}}</td>
               <td><ship-audio :url="result.url[v]" :vid="v"></ship-audio></td>
@@ -44,15 +48,23 @@ module.exports =
     , (err) ->
       dimmer.className = dimmer.className.replace 'active', ''
       console.error err
+  methods:
+    toggle: ->
+      this.$set 'sameState', !@sameState
   data: ->
     result: {}
     names: []
     voices: []
+    sameState: true
 </script>
 
 <style>
 #list {
   padding: 5% 5% 5%;
+}
+
+.sub.header {
+  line-height: 28px;
 }
 
 .table a {
