@@ -25,7 +25,7 @@ module.exports =
   ready: ->
     dimmer = document.querySelector('.ui.dimmer')
     dimmer.className += ' active'
-    this.$http.get('/data/ship_names.json').then (response) ->
+    this.$http.get('data/ship_names.json').then (response) ->
       this.$set('shipList', response.data)
       dimmer.className = dimmer.className.replace('active', '')
     , (err) ->

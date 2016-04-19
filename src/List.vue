@@ -35,9 +35,9 @@ module.exports =
     dimmer = document.querySelector('.ui.dimmer')
     dimmer.className += ' active'
     id = this.$route.params.id
-    this.$http.get("/data/voice_names.json").then (response) ->
+    this.$http.get("data/voice_names.json").then (response) ->
       this.$set('names', response.data)
-    this.$http.get("/data/#{id}.json").then (response) ->
+    this.$http.get("data/#{id}.json").then (response) ->
       this.$set('result', response.data)
       this.$set('voices', Object.keys(response.data.url))
       dimmer.className = dimmer.className.replace 'active', ''
