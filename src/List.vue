@@ -49,7 +49,7 @@ module.exports =
     , (err) ->
       dimmer.className = dimmer.className.replace 'active', ''
       console.error err
-    this.$http.get("http://gizeta.github.io/kcdata/ship/#{id}.json").then (response) ->
+    this.$http.get("http://kcwikizh.github.io/kcdata/ship/#{id}.json").then (response) ->
       this.$set('wikiId', response.data.wiki_id)
   methods:
     toggle: ->
