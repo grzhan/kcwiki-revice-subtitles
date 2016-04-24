@@ -22,7 +22,7 @@
               <td>{{v}}</td>
               <td>{{names[v]}}</td>
               <td><ship-audio :url="result.url[v]" :vid="v"></ship-audio></td>
-              <td><ship-audio :url="v | wiki-file wikiId" :vid="wikiId + '-' + v"></ship-audio></td>
+              <td><ship-audio :url="v | wiki-file wikiId" :vid="wikiId + '-' + v" v-if="result.same && !result.same[v]"></ship-audio></td>
               <td><a href="{{result.url[v]}}" download="{{v}}.mp3"><i class="download icon"></i></a></td>
               <td>{{result.jp[v]}}</td>
               <td>{{result.zh[v]}}</td>
