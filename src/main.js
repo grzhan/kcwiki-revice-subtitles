@@ -13,7 +13,7 @@ Vue.filter('wiki-file', (fileId, wikiId) => {
 	if (wikiId.length == '') return '#'
 	var filename = `${wikiId}-${VoiceFilename[fileId]}.mp3`
 	var hash = md5(filename)
-	return `http://kc.6candy.com/commons/${hash[0]}/${hash.substr(0, 2)}/${filename}`
+	return `http://upload.kcwiki.moe/commons/${hash[0]}/${hash.substr(0, 2)}/${filename}`
 });
 var router = new VueRouter()
 router.map({
