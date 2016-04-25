@@ -11,10 +11,10 @@
         </div>
       </h1>
       <div class="ui fluid input">
-        <input type="text" v-model="query" placeholder="输入要找的舰娘名（仅支持日文）或ID">
+        <input type="text" v-model="query" placeholder="输入要找的舰娘名或ID">
       </div>
       <div class="ui stackable grid" id="container">
-      <div class="three wide column" v-for="ship in shipList | filterBy query"><a v-link="'List/'+ship.shipId" class="ui tag teal label">{{ship.shipId}}.{{ ship.shipName }}</a></div>
+      <div class="three wide column" v-for="ship in shipList | filterBy query"><a v-link="'List/'+ship.id" class="ui tag teal label">{{ship.wiki_id}}.{{ ship.name }}</a></div>
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@ module.exports =
   ready: ->
     dimmer = document.querySelector('.ui.dimmer')
     dimmer.className += ' active'
-    this.$http.get('data/ship_names.json').then (response) ->
+    this.$http.get('http://kcwikizh.github.io/kcdata/ship/all.json').then (response) ->
       this.$set('shipList', response.data)
       dimmer.className = dimmer.className.replace('active', '')
     , (err) ->
