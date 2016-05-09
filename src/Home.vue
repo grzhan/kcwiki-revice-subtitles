@@ -7,7 +7,7 @@
       <h1 class="ui centered dividing header">
         kcwiki舰娘语音校对表
         <div class="sub header">
-            ver.{{verson}} by grzhan
+            ver.{{version}} by grzhan
         </div>
       </h1>
       <div class="ui fluid input">
@@ -25,6 +25,8 @@ module.exports =
   ready: ->
     dimmer = document.querySelector('.ui.dimmer')
     dimmer.className += ' active'
+    this.$http.get('http://api.kcwiki.moe/subtitles/version').then (response) ->
+      this.$set('version', response.data.version[...-2])
     this.$http.get('http://kcwikizh.github.io/kcdata/ship/all.json').then (response) ->
       this.$set('shipList', response.data)
       dimmer.className = dimmer.className.replace('active', '')
@@ -32,7 +34,7 @@ module.exports =
       dimmer.className = dimmer.className.replace('active', '')
       console.error err
   data: ->
-    verson: '20160410'
+    version: '20160410'
     title: '舰娘语音校对表'
     shipList: []
 </script>
