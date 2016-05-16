@@ -24,15 +24,20 @@
 module.exports =
   ready: ->
     dimmer = document.querySelector('.ui.dimmer')
-    dimmer.className += ' active'
     this.$http.get('http://api.kcwiki.moe/subtitles/version').then (response) ->
       this.$set('version', response.data.version[...-2])
-    this.$http.get('http://kcwikizh.github.io/kcdata/ship/all.json').then (response) ->
-      this.$set('shipList', response.data)
-      dimmer.className = dimmer.className.replace('active', '')
-    , (err) ->
-      dimmer.className = dimmer.className.replace('active', '')
-      console.error err
+    data = JSON.parse sessionStorage.getItem("shipdata")
+    if not data
+      dimmer.className += ' active'
+      this.$http.get('http://api.kcwiki.moe/ships').then (response) ->
+        this.$set('shipList', response.data)
+        sessionStorage.setItem("shipdata", JSON.stringify response.data)
+        dimmer.className = dimmer.className.replace('active', '')
+      , (err) ->
+        dimmer.className = dimmer.className.replace('active', '')
+        console.error err
+    else
+      this.$set('shipList', data)
   data: ->
     version: '20160410'
     title: '舰娘语音校对表'
