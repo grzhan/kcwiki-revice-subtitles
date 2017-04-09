@@ -14,7 +14,7 @@
         <input type="text" v-model="query" placeholder="输入要找的舰娘名或ID">
       </div>
       <div class="ui stackable grid" id="container">
-      <div class="three wide column" v-for="ship in shipList | filterBy query" v-if="ship.wiki_id && ship.id < 500"><a v-link="'List/'+ship.id" class="ui tag teal label">{{ship.wiki_id}}.{{ ship.name }}</a></div>
+      <div class="three wide column" v-for="ship in shipList | filterBy query" v-if="ship.wiki_id && ship.id < 800"><a v-link="'List/'+ship.id" class="ui tag teal label">{{ship.wiki_id}}.{{ ship.name }}</a></div>
       </div>
     </div>
   </div>
